@@ -28,4 +28,4 @@ npm test
 npm run build
 ```
 
-Review the generated catalog, mesh counts and rendered results before publishing. Face geometry provides visual context and does not increase the muscle count. Surface deformation and material detail are illustrative additions, not new anatomical measurements.
+Review the generated catalog, mesh counts and rendered results before publishing. Skin preparation smooths the external genital region into a continuous surface before generating deformation fields; it retains the source vertex IDs for facial-mask compatibility. Face geometry provides visual context and does not increase the muscle count. Surface deformation and material detail are illustrative additions, not new anatomical measurements.

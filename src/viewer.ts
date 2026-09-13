@@ -11,13 +11,15 @@ interface SkinField {name:string;indices:Uint32Array;delta:Float32Array}
 interface Piece {mesh:THREE.Mesh;baseline:THREE.Mesh;info:MeshInfo;original:Float32Array;size:number}
 interface FaceData {meshes:{kind:'sclera'|'iris'|'cornea';sourceId:string;positions:number[];indices:number[]}[];lipMask:[number,number][]}
 
+// Version the changed surface files together so cached anatomy cannot restore the old surface.
+const SURFACE_REVISION='2';
 let assets: Promise<[ArrayBuffer,ArrayBuffer,ArrayBuffer,SkinManifest,FaceData]> | undefined;
 function getAssets() {
   if (!assets) assets=Promise.all([
     ...['muscles.glb','skeleton.glb','skin.bin'].map(async n=> {
-      const r=await fetch(`${import.meta.env.BASE_URL}anatomy/${n}`);if(!r.ok)throw new Error(`Could not load ${n}`);return r.arrayBuffer();
+      const r=await fetch(`${import.meta.env.BASE_URL}anatomy/${n}${n==='skin.bin'?`?v=${SURFACE_REVISION}`:''}`);if(!r.ok)throw new Error(`Could not load ${n}`);return r.arrayBuffer();
     }),
-    fetch(`${import.meta.env.BASE_URL}anatomy/skin.json`).then(r=>{if(!r.ok)throw new Error('Could not load skin metadata');return r.json();}),
+    fetch(`${import.meta.env.BASE_URL}anatomy/skin.json?v=${SURFACE_REVISION}`).then(r=>{if(!r.ok)throw new Error('Could not load skin metadata');return r.json();}),
     fetch(`${import.meta.env.BASE_URL}anatomy/face.json`).then(r=>{if(!r.ok)throw new Error('Could not load facial anatomy');return r.json();}),
   ]) as Promise<[ArrayBuffer,ArrayBuffer,ArrayBuffer,SkinManifest,FaceData]>;
   return assets;
@@ -64,7 +66,7 @@ export async function createViewer(host: HTMLElement, catalog: Catalog,
   const key=new THREE.DirectionalLight(0xfffaf2,2.5);key.position.set(-8,14,16);scene.add(key);
   key.castShadow=true;key.shadow.mapSize.set(2048,2048);
   key.shadow.camera.left=-15;key.shadow.camera.right=15;key.shadow.camera.top=15;key.shadow.camera.bottom=-15;
-  key.shadow.camera.near=.5;key.shadow.camera.far=60;key.shadow.normalBias=.018;key.shadow.bias=-.00012;
+  key.shadow.camera.near=.5;key.shadow.camera.far=60;key.shadow.normalBias=.025;key.shadow.bias=.0001;
   const fill=new THREE.DirectionalLight(0xe6f1f0,1.1);fill.position.set(10,5,-10);scene.add(fill);
   const front=new THREE.DirectionalLight(0xffffff,.5);front.position.set(5,0,20);scene.add(front);
   const editRoot=new THREE.Group();const baseRoot=new THREE.Group();scene.add(editRoot,baseRoot);baseRoot.visible=false;

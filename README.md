@@ -50,12 +50,12 @@ You can save an experiment, return to the reference, and try another direction. 
 ## What is included
 
 - **236 muscle groups and parts**, represented by **446 muscle meshes**, across 12 regions from head to feet. Bilateral counterparts share controls and can be adjusted separately.
-- A skeleton and skin surface to relate anatomical position to the outer silhouette.
+- A skeleton and skin surface to relate anatomical position to the outer silhouette. The skin model uses a smooth, simplified groin surface with external genital details removed.
 - Size exploration from **0.25× to 10×**, logarithmic slider spacing, exact numeric entry and quick presets.
 - Front, back and side views, free rotation, pointer-directed zoom, panning, regional focus and selected-muscle focus.
 - See-through anatomy and isolation for inspecting structures beneath the surface.
 - Side-by-side comparison, a list of adjustments, undo and reset.
-- Local saving plus JSON export and import. No sign-up or backend.
+- Automatic local saving and import of previously saved JSON shapes. No sign-up or backend.
 - A responsive interface with touch controls and a muscle picker on smaller screens.
 
 The coverage is broad, **but it is not every muscle in the human body**. Some segmental structures are grouped, some anatomical variants and small structures are absent, and some source meshes combine parts. Counts describe this dataset, not a definitive muscle count. Cardiac and smooth muscle are outside this explorer. Small eye, face and throat structures are included for anatomy study, not as suggested training targets.
@@ -105,7 +105,7 @@ npx playwright install chromium
 npm run test:browser         # Desktop, mobile and camera interactions
 ```
 
-A WebGL-capable browser is required. Anatomical assets total approximately 45 MB, so the first load may take a moment. After loading, the model and controls run in the browser. Google Fonts supplies the interface typography; system fonts provide a fallback.
+A WebGL-capable browser is required. Anatomical assets total approximately 48 MB, so the first load may take a moment. After loading, the model and controls run in the browser. Google Fonts supplies the interface typography; system fonts provide a fallback.
 
 ## GitHub Pages
 
@@ -137,7 +137,7 @@ React and TypeScript handle the explorer, Three.js renders the anatomical layers
 
 Generated runtime assets are included, so Python is not needed to run or build the app. Rebuilding the assets requires Python, NumPy, SciPy and the upstream source files described in [the asset preparation notes](docs/ASSETS.md). The raw source archive and local development artifacts are intentionally excluded from Git.
 
-Saved shapes stay in your browser's local storage until you reset them or clear browser data. **Save shape** exports a JSON file; **Import shape** restores it. The app does not add analytics or send shape adjustments to a server. Hosting and font providers still receive ordinary requests for the files they serve. The original `FORM` identifier remains inside version-1 shape files to preserve compatibility with earlier experiments.
+Adjustments stay in your browser's local storage until you reset them or clear browser data. **Import shape** can restore JSON files from earlier versions. The app does not add analytics or send shape adjustments to a server. Hosting and font providers still receive ordinary requests for the files they serve. The original `FORM` identifier remains inside version-1 shape files to preserve compatibility with earlier experiments.
 
 ## Sources and licensing
 

@@ -11,7 +11,7 @@ BodyParts3D, © The Database Center for Life Science licensed under CC Attributi
 - CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
 - Source release: BodyParts3D 4.0, reduced polygon meshes.
 
-The skin layer was extracted from the official `isa_BP3D_4.0_obj_99.zip`, element FJ2810. Learn Your Physique converted the mesh to a compact binary format and added approximate deformation fields. The archive itself contains older CC BY-SA 2.1 Japan notices; these are acknowledged here alongside the archive's current license.
+The skin layer was extracted from the official `isa_BP3D_4.0_obj_99.zip`, element FJ2810. Learn Your Physique converted the mesh to a compact binary format, replaced external genital detail with a smooth local skin patch, and added approximate deformation fields. The surrounding body and source vertex topology are retained. The archive itself contains older CC BY-SA 2.1 Japan notices; these are acknowledged here alongside the archive's current license.
 
 Facial context uses the same archive's left/right sclera (FJ1317/FJ1368), iris (FJ1297/FJ1348), and cornea (FJ1289/FJ1340). FJ2814 (lip) supplies a color mask registered to the skin vertices. Eye geometry retains its source coordinates. Iris appearance, dark pupil backing, muscle-fiber and skin microdetail, complexion color, and lighting are illustrative rendering additions. They do not add to the muscle count or represent personal biometric details.
 

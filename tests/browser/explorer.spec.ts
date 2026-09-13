@@ -56,14 +56,11 @@ test('3D atlas, geometry slider, independent sides, comparison, search, and save
   await page.getByRole('button',{name:'See through',exact:true}).click();
   await expect(page.getByRole('button',{name:'See through',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.getByRole('button',{name:'See through',exact:true}).click();
-  const download=page.waitForEvent('download');
-  await page.getByRole('button',{name:'Save shape'}).click();
-  const shape=await download;
-  expect(shape.suggestedFilename()).toBe('learn-your-physique-shape.json');
-  const file=await shape.path();
+  await expect(page.getByRole('button',{name:'Save shape'})).toHaveCount(0);
+  const saved=await page.evaluate(()=>localStorage.getItem('form-physique-v1'));
   await page.getByRole('button',{name:'Reset all'}).click();
   await expect(page.locator('.nav-count')).toHaveText('0');
-  await page.locator('input[type=file]').setInputFiles(file!);
+  await page.locator('input[type=file]').setInputFiles({name:'previous-shape.json',mimeType:'application/json',buffer:Buffer.from(saved!)});
   await expect(page.locator('.nav-count')).toHaveText('1');
   await page.reload();
   await expect(page.locator('.nav-count')).toHaveText('1');

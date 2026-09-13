@@ -74,3 +74,19 @@ test('skin buffers and every sparse deformation field fit the binary asset',()=>
     for(let i=0;i<f.count;i++)assert.ok(data.readUInt32LE(f.offset+i*4)<meta.vertexCount);
   }
 });
+
+test('the skin retains a continuous groin surface without the original genital projection',()=>{
+  const meta=JSON.parse(readFileSync(new URL('../public/anatomy/skin.json',import.meta.url)));
+  const data=readFileSync(new URL('../public/anatomy/skin.bin',import.meta.url));
+  let surfacePoints=0;
+  for(let i=0;i<meta.vertexCount;i++){
+    const x=data.readFloatLE(i*12),y=data.readFloatLE(i*12+4),z=data.readFloatLE(i*12+8);
+    assert.ok(Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z));
+    if(Math.abs(x)<25&&z>690&&z<775&&y<-75){
+      surfacePoints++;
+      assert.ok(y>-175,'The original external genital projection must not remain');
+    }
+  }
+  assert.ok(surfacePoints>100,'The region must retain a skin surface');
+  for(let i=0;i<meta.indexCount;i++)assert.ok(data.readUInt32LE(meta.vertexCount*12+i*4)<meta.vertexCount);
+});
