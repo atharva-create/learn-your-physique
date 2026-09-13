@@ -45,7 +45,7 @@ Anatomical movement context draws on [OpenStax's Anatomy and Physiology 2e, chap
 4. **Compare anatomy with silhouette.** Switch between **Anatomy** and **Physique**, then use **Compare** to place the reference beside your adjustments.
 5. **Consider the whole body.** Explore adjacent muscles, deeper structures and different angles. Use what you notice as context for learning about training, rather than treating a slider setting as a workout target.
 
-You can save an experiment, return to the reference, and try another direction. Exploring a shape does not commit you to pursuing it.
+You can adjust one region, return to the reference, and try another direction. Exploring a shape does not commit you to pursuing it.
 
 ## What is included
 
