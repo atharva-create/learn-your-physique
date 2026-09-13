@@ -1,0 +1,7 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+export default defineConfig({
+  base: process.env.VITE_BASE_PATH || '/',
+  plugins: [react()],
+  build: { rollupOptions: { output: { manualChunks: { three: ['three','three/addons/loaders/GLTFLoader.js','three/addons/controls/OrbitControls.js'] } } } }
+});
